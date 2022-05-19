@@ -10,7 +10,7 @@ class ProfileHeaderView: UIView {
     let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        fullNameLabel.text = "Ponchik sweet dog"
+        fullNameLabel.text = "Avatar person"
         fullNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         fullNameLabel.textColor = .black
         return fullNameLabel
