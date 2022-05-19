@@ -1,9 +1,6 @@
 //
 //  ProfileView.swift
 //  Netology_IB_Instruments
-//
-//  Created by antonfrolov on 31.03.2022.
-//
 
 import UIKit
 
