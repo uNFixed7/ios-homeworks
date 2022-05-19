@@ -24,6 +24,14 @@ class TabBarCon: UITabBarController {
         let navController1 = UINavigationController(rootViewController: firstVC)
         let navController2 = UINavigationController(rootViewController: secondVC)
         
+        UITabBar.appearance().barTintColor = .systemBlue
+        UITabBar.appearance().backgroundColor = .white
+        UINavigationBar.appearance().backgroundColor = .white
+        
+        let statusBarView = UIView(frame: UIApplication.shared.statusBarFrame)
+        statusBarView.backgroundColor = .white
+        view.addSubview(statusBarView)
+        
         viewControllers = [navController1, navController2]
     }
 }
