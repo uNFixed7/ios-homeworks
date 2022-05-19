@@ -27,8 +27,6 @@ class LogInViewController: UIViewController {
     private lazy var loginInput: UITextField = {
         $0.placeholder = " Email or phone"
         $0.font = UIFont.systemFont(ofSize: 16)
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.height))
-        $0.leftViewMode = .always
         $0.autocapitalizationType = .none
         $0.delegate = self
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -44,8 +42,6 @@ class LogInViewController: UIViewController {
     private lazy var passwordInput: UITextField = {
         $0.placeholder = " Password"
         $0.font = UIFont.systemFont(ofSize: 16)
-        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.height))
-        $0.leftViewMode = .always
         $0.autocapitalizationType = .none
         $0.isSecureTextEntry = true
         $0.delegate = self
@@ -65,7 +61,6 @@ class LogInViewController: UIViewController {
     
     private let scrollView: UIScrollView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .systemBackground
         return $0
     }(UIScrollView())
     
