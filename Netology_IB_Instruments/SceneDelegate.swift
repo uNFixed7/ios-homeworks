@@ -2,7 +2,6 @@
 //  SceneDelegate.swift
 //  Netology_IB_Instruments
 
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
