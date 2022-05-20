@@ -1,16 +1,10 @@
-//
-//  PostViewController.swift
-//  Navigation
-//
-//  Created by antonfrolov on 05.04.2022.
-//
+
 
 import UIKit
 
 class PostViewController: UIViewController {
     
-    var post = Post(title: "Def title", description: "Def desc", author: "Noname", likes: 0, views: 0)
-    
+    weak var postViewDelegate: PostViewDelegate?
     
     private lazy var tableView: UITableView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -20,9 +14,9 @@ class PostViewController: UIViewController {
         return $0
     }(UITableView())
     
-    convenience init(post: Post){
+    convenience init(postViewDelegate: PostViewDelegate){
         self.init()
-        self.post = post
+        self.postViewDelegate = postViewDelegate
     }
     
     override func viewDidLoad() {
@@ -30,11 +24,9 @@ class PostViewController: UIViewController {
         
         navigationController?.navigationBar.isHidden = false
 
-        view.backgroundColor = .yellow
-        navigationItem.title = post.title
+        //navigationItem.title = post.title
         
         layout()
-        
         
         let barItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(tapBarItem))
         navigationItem.rightBarButtonItem = barItem
@@ -71,9 +63,8 @@ extension PostViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
        
-        cell.setupCell(post)
         cell.selectionStyle = .none
-        
+        cell.setupCell(self.postViewDelegate)
         return cell
     }
 }

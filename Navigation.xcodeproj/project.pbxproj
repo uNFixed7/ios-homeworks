@@ -13,11 +13,11 @@
 		9A37110E27FC43C40006A245 /* TabBarCon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37110D27FC43C40006A245 /* TabBarCon.swift */; };
 		9A37111027FC50FA0006A245 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37110F27FC50FA0006A245 /* FeedViewController.swift */; };
 		9A37111427FC62E60006A245 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37111327FC62E60006A245 /* PostViewController.swift */; };
-		9A37111627FC6CAD0006A245 /* PostStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37111527FC6CAD0006A245 /* PostStruct.swift */; };
+		9A37111627FC6CAD0006A245 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37111527FC6CAD0006A245 /* Structs.swift */; };
 		9A37111827FC73D60006A245 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37111727FC73D60006A245 /* InfoViewController.swift */; };
 		9A37111B280287DC0006A245 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37111A280287DC0006A245 /* ProfileHeaderView.swift */; };
 		9A37111D280288D90006A245 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A37111C280288D90006A245 /* ProfileViewController.swift */; };
-		9AAE42AF2810163900E51FD1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE42AE2810163900E51FD1 /* TestViewController.swift */; };
+		9A59179E2824111B00DCD4E6 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A59179D2824111B00DCD4E6 /* Protocols.swift */; };
 		9AAE42B128113D3400E51FD1 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE42B028113D3400E51FD1 /* PhotosTableViewCell.swift */; };
 		9AAE42B42811861D00E51FD1 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE42B32811861D00E51FD1 /* PhotosViewController.swift */; };
 		9AAE42B62811867E00E51FD1 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE42B52811867E00E51FD1 /* PhotosCollectionViewCell.swift */; };
@@ -25,7 +25,7 @@
 		9AFC7CDA280D28C500CAA015 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFC7CD9280D28C500CAA015 /* LogInViewController.swift */; };
 		9AFC7CDC280E761100CAA015 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFC7CDB280E761100CAA015 /* PostTableViewCell.swift */; };
 		9AFC7CDE280E780400CAA015 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFC7CDD280E780400CAA015 /* CustomTableViewCell.swift */; };
-		9AFC7CE0280E90D400CAA015 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFC7CDF280E90D400CAA015 /* UIViewExtension.swift */; };
+		9AFC7CE0280E90D400CAA015 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFC7CDF280E90D400CAA015 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,11 +37,11 @@
 		9A37110D27FC43C40006A245 /* TabBarCon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCon.swift; sourceTree = "<group>"; };
 		9A37110F27FC50FA0006A245 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9A37111327FC62E60006A245 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		9A37111527FC6CAD0006A245 /* PostStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStruct.swift; sourceTree = "<group>"; };
+		9A37111527FC6CAD0006A245 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		9A37111727FC73D60006A245 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		9A37111A280287DC0006A245 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		9A37111C280288D90006A245 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		9AAE42AE2810163900E51FD1 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		9A59179D2824111B00DCD4E6 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		9AAE42B028113D3400E51FD1 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		9AAE42B32811861D00E51FD1 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		9AAE42B52811867E00E51FD1 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -49,7 +49,7 @@
 		9AFC7CD9280D28C500CAA015 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		9AFC7CDB280E761100CAA015 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		9AFC7CDD280E780400CAA015 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		9AFC7CDF280E90D400CAA015 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		9AFC7CDF280E90D400CAA015 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,18 +82,20 @@
 		9A3710F827FC422E0006A245 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				9AAE42B2281185E900E51FD1 /* Photos */,
-				9A371119280287B00006A245 /* Profile */,
-				9AAE42AD2810053100E51FD1 /* Feed */,
-				9AFC7CE1280EFD4100CAA015 /* Post */,
 				9A3710F927FC422E0006A245 /* AppDelegate.swift */,
 				9A37110D27FC43C40006A245 /* TabBarCon.swift */,
+				9A59179F28244B0900DCD4E6 /* Login */,
+				9AAE42AD2810053100E51FD1 /* Feed */,
+				9A371119280287B00006A245 /* Profile */,
+				9AAE42B2281185E900E51FD1 /* Photos */,
+				9AFC7CE1280EFD4100CAA015 /* Post */,
 				9A37111727FC73D60006A245 /* InfoViewController.swift */,
-				9AFC7CDF280E90D400CAA015 /* UIViewExtension.swift */,
 				9A37110427FC422F0006A245 /* LaunchScreen.storyboard */,
 				9A37110227FC422F0006A245 /* Assets.xcassets */,
 				9A37110727FC422F0006A245 /* Info.plist */,
-				9AAE42AE2810163900E51FD1 /* TestViewController.swift */,
+				9A37111527FC6CAD0006A245 /* Structs.swift */,
+				9AFC7CDF280E90D400CAA015 /* Extensions.swift */,
+				9A59179D2824111B00DCD4E6 /* Protocols.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -101,14 +103,29 @@
 		9A371119280287B00006A245 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				9AFC7CD9280D28C500CAA015 /* LogInViewController.swift */,
 				9A37111C280288D90006A245 /* ProfileViewController.swift */,
 				9A37111A280287DC0006A245 /* ProfileHeaderView.swift */,
-				9AAE42B028113D3400E51FD1 /* PhotosTableViewCell.swift */,
-				9AAE42B7281199DB00E51FD1 /* PrePhotosCollectionViewCell.swift */,
+				9A5917A028244B3100DCD4E6 /* Preview photos */,
 				9AFC7CDD280E780400CAA015 /* CustomTableViewCell.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		9A59179F28244B0900DCD4E6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9AFC7CD9280D28C500CAA015 /* LogInViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		9A5917A028244B3100DCD4E6 /* Preview photos */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE42B028113D3400E51FD1 /* PhotosTableViewCell.swift */,
+				9AAE42B7281199DB00E51FD1 /* PrePhotosCollectionViewCell.swift */,
+			);
+			path = "Preview photos";
 			sourceTree = "<group>";
 		};
 		9AAE42AD2810053100E51FD1 /* Feed */ = {
@@ -133,7 +150,6 @@
 			children = (
 				9A37111327FC62E60006A245 /* PostViewController.swift */,
 				9AFC7CDB280E761100CAA015 /* PostTableViewCell.swift */,
-				9A37111527FC6CAD0006A245 /* PostStruct.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -211,12 +227,12 @@
 				9A37111027FC50FA0006A245 /* FeedViewController.swift in Sources */,
 				9A3710FA27FC422E0006A245 /* AppDelegate.swift in Sources */,
 				9AFC7CDE280E780400CAA015 /* CustomTableViewCell.swift in Sources */,
+				9A59179E2824111B00DCD4E6 /* Protocols.swift in Sources */,
 				9AFC7CDA280D28C500CAA015 /* LogInViewController.swift in Sources */,
 				9A37111827FC73D60006A245 /* InfoViewController.swift in Sources */,
-				9AAE42AF2810163900E51FD1 /* TestViewController.swift in Sources */,
-				9A37111627FC6CAD0006A245 /* PostStruct.swift in Sources */,
+				9A37111627FC6CAD0006A245 /* Structs.swift in Sources */,
 				9AAE42B8281199DB00E51FD1 /* PrePhotosCollectionViewCell.swift in Sources */,
-				9AFC7CE0280E90D400CAA015 /* UIViewExtension.swift in Sources */,
+				9AFC7CE0280E90D400CAA015 /* Extensions.swift in Sources */,
 				9AAE42B128113D3400E51FD1 /* PhotosTableViewCell.swift in Sources */,
 				9AAE42B42811861D00E51FD1 /* PhotosViewController.swift in Sources */,
 				9A37110E27FC43C40006A245 /* TabBarCon.swift in Sources */,
@@ -375,7 +391,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = RK.Navigation;
+				PRODUCT_BUNDLE_IDENTIFIER = JustApps.Navigation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -402,7 +418,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = RK.Navigation;
+				PRODUCT_BUNDLE_IDENTIFIER = JustApps.Navigation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -3,6 +3,8 @@
 import Foundation
 import UIKit
 
+
+
 class ProfileViewController: UIViewController {
     
     private let postsList: [Post] = Post.presetData()
@@ -88,6 +90,7 @@ extension ProfileViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier) as! CustomTableViewCell
            
             cell.setupCell(postsList[indexPath.row])
+            cell.tapViewDelegate = self
             cell.separatorInset = .init(top: 0, left: 16, bottom: 0, right: 16)
             
             return cell
@@ -110,7 +113,7 @@ extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 200
+            return 230
         } else {
             return 0
         }
@@ -134,8 +137,18 @@ extension ProfileViewController: UITableViewDelegate {
             navigationController?.pushViewController(photosVC, animated: true)
             
         } else {
-            let detailVC = PostViewController(post: postsList[indexPath.row])
-            navigationController?.pushViewController(detailVC, animated: true)
+           // let detailVC = PostViewController(post: postsList[indexPath.row])
+           // navigationController?.pushViewController(detailVC, animated: true)
         }
     }
 }
+
+
+extension ProfileViewController: TapViewDelegate {
+    
+    func postImagePressed(postViewDelegate: PostViewDelegate) {
+        let detailVC = PostViewController(postViewDelegate: postViewDelegate)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+

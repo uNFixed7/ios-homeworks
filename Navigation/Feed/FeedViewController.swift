@@ -4,6 +4,8 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
+    weak var postViewDelegate: PostViewDelegate?
+    
     private let newStack: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .systemPink
@@ -40,7 +42,6 @@ class FeedViewController: UIViewController {
     
     @objc private func tapAction() {
         let postViewController = PostViewController()
-        postViewController.post = Post(title: "New post", description: "New desc", author: "Noname", likes: 0, views: 0)
         navigationController?.pushViewController(postViewController, animated: true)
     }
     

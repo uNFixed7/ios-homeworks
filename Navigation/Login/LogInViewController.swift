@@ -4,6 +4,9 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    private lazy var loginText: String = loginInput.text ?? ""
+    private lazy var passwordText: String = passwordInput.text ?? ""
+    
     private let nc = NotificationCenter.default
     
     private let newStack: UIStackView = {
@@ -25,11 +28,14 @@ class LogInViewController: UIViewController {
     }(UIImageView())
     
     private lazy var loginInput: UITextField = {
-        $0.placeholder = " Email or phone"
+        $0.placeholder = "Email or phone"
         $0.font = UIFont.systemFont(ofSize: 16)
+        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.height))
+        $0.leftViewMode = .always
         $0.autocapitalizationType = .none
         $0.delegate = self
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.addTarget(self, action: #selector(loginTextChanged), for: .editingChanged)
         return $0
     }(UITextField())
     
@@ -40,14 +46,26 @@ class LogInViewController: UIViewController {
     }(UIView())
     
     private lazy var passwordInput: UITextField = {
-        $0.placeholder = " Password"
+        $0.placeholder = "Password"
         $0.font = UIFont.systemFont(ofSize: 16)
+        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.height))
+        $0.leftViewMode = .always
         $0.autocapitalizationType = .none
         $0.isSecureTextEntry = true
         $0.delegate = self
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.addTarget(self, action: #selector(passwordTextChanged), for: .editingChanged)
         return $0
     }(UITextField())
+    
+    private let passwortCaption: UILabel = {
+        $0.text = "Password is too short, it should be at least 6 character"
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textColor = .red
+        $0.isHidden = true
+        $0.font = UIFont.systemFont(ofSize: 10)
+        return $0
+    }(UILabel())
     
     private let loginButton: UIButton = {
         $0.layer.cornerRadius = 10
@@ -61,6 +79,7 @@ class LogInViewController: UIViewController {
     
     private let scrollView: UIScrollView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .systemBackground
         return $0
     }(UIScrollView())
     
@@ -90,7 +109,6 @@ class LogInViewController: UIViewController {
         nc.addObserver(self, selector: #selector(kbdHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         navigationController?.navigationBar.isHidden = true
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -113,7 +131,81 @@ class LogInViewController: UIViewController {
     
     @objc private func tapAction() {
         let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
+        
+        if loginText == "" || passwordText.count < 6 {
+            
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0,
+                usingSpringWithDamping: 0.1,
+                initialSpringVelocity: 0.1,
+                options: .curveEaseInOut) {
+                    
+                  /*  self.loginInput.attributedPlaceholder = NSAttributedString(
+                        string: "Incorrect login",
+                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
+                    )*/
+                    
+                    if self.loginText == "" {
+                        self.loginInput.center.x += 2
+                    }
+                    
+                    if self.passwordText == "" {
+                        self.passwordInput.center.x += 2
+                    }
+                    
+                    
+                } completion: { _ in
+                    UIView.animate(withDuration: 0.1,
+                                   delay: 0) {
+                        
+                        if self.loginText == "" {
+                            self.loginInput.center.x -= 2
+                        }
+                        
+                        if self.passwordText == "" {
+                            self.passwordInput.center.x -= 2
+                        }
+                    }
+                }
+            
+            if passwordText != "" && passwordText.count < 6 {
+                passwortCaption.isHidden = false
+                
+                _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(delayedTimer), userInfo: nil, repeats: false)
+            }
+    
+            return
+        }
+        
+        if loginText != "login" || passwordText != "password" {
+            
+            let alertCon = UIAlertController()
+            alertCon.title = "Incorrect login or password"
+            alertCon.message = "Please, chech login and password and try againg.\n Correct login is \"login\" and correct password is \"password\"."
+           
+            let alertRight = UIAlertAction(title: "Ok", style: .default)
+            alertCon.addAction(alertRight)
+            
+            present(alertCon, animated: true)
+        }
+        
+        
+        if loginText == "login" && passwordText == "password" {
+            navigationController?.pushViewController(profileViewController, animated: true)
+        }
+    }
+    
+    @objc private func delayedTimer() {
+        passwortCaption.isHidden = true
+    }
+    
+    @objc private func loginTextChanged(_ textField: UITextField) {
+        loginText = textField.text!
+    }
+    
+    @objc private func passwordTextChanged(_ textField: UITextField) {
+        passwordText = textField.text!
     }
     
     private func layout(){
@@ -176,10 +268,22 @@ class LogInViewController: UIViewController {
         
         ])
         
+        contentView.addSubview(passwortCaption)
+        
+        NSLayoutConstraint.activate([
+        
+            passwortCaption.topAnchor.constraint(equalTo: newStack.bottomAnchor, constant: 8),
+            passwortCaption.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 26),
+           // passwortCaption.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+           // passwortCaption.heightAnchor.constraint(equalToConstant: 10),
+           // passwortCaption.widthAnchor.constraint(equalToConstant: 100)
+        
+        ])
+        
         contentView.addSubview(loginButton)
         
         NSLayoutConstraint.activate([
-            loginButton.topAnchor.constraint(equalTo: passwordInput.bottomAnchor, constant: 16),
+            loginButton.topAnchor.constraint(equalTo: newStack.bottomAnchor, constant: 32),
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
@@ -187,7 +291,6 @@ class LogInViewController: UIViewController {
             loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50)
         ])
         
-
     }
 }
 

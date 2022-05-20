@@ -7,14 +7,6 @@ class ProfileHeaderView: UIView {
     
     private lazy var textToPrint: String = statusTextField.text ?? ""
     
-    private var avatarImageViewLeading = NSLayoutConstraint()
-    private var avatarImageViewTop = NSLayoutConstraint()
-    private var avatarImageViewWidth = NSLayoutConstraint()
-    private var avatarImageViewHeight = NSLayoutConstraint()
-    private var avatarImageViewX = CGFloat()
-    private var avatarImageViewY = CGFloat()
-
-    
     private let whiteView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
@@ -22,17 +14,14 @@ class ProfileHeaderView: UIView {
     
     private let blackView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .black
-        
+        $0.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         $0.isHidden = true
-        $0.alpha = 0.5
         return $0
     }(UIView())
     
     private let closeButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .blue
-        
         $0.setTitle("Close", for: .normal)
         $0.addTarget(self, action: #selector(hideAction), for: .touchUpInside)
         return $0
@@ -76,6 +65,8 @@ class ProfileHeaderView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.placeholder = "Waiting for something.."
         $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.height))
+        $0.leftViewMode = .always
         $0.textColor = .black
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.black.cgColor
@@ -105,21 +96,12 @@ class ProfileHeaderView: UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         addGestureRecognizer(tapGesture)
         
+        let tapAvatar = UITapGestureRecognizer(target: self, action: #selector(showAction))
+        avatarImageView.addGestureRecognizer(tapAvatar)
+        
         isUserInteractionEnabled = true
         
         layout()
-        setupGestures()
-    }
-    
-    @objc private func dismissKeyboard (_ sender: UITapGestureRecognizer) {
-        statusTextField.resignFirstResponder()
-    }
-    
-    func setupGestures(){
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showAction))
-
-        avatarImageView.addGestureRecognizer(tapGesture)
     }
     
     private func layout()
@@ -133,11 +115,6 @@ class ProfileHeaderView: UIView {
         
         let inset: CGFloat = 16
         
-        avatarImageViewLeading = avatarImageView.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: inset)
-        avatarImageViewTop = avatarImageView.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: inset)
-        avatarImageViewWidth = avatarImageView.widthAnchor.constraint(equalToConstant: 100)
-        avatarImageViewHeight = avatarImageView.heightAnchor.constraint(equalToConstant: 100)
-        
         NSLayoutConstraint.activate([
             
             
@@ -145,6 +122,7 @@ class ProfileHeaderView: UIView {
             whiteView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             whiteView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             whiteView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+       
             
             substrateImageView.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: inset),
             substrateImageView.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: inset),
@@ -154,13 +132,13 @@ class ProfileHeaderView: UIView {
             blackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             blackView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
             
+            avatarImageView.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: inset),
+            avatarImageView.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: inset),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+            
             closeButton.topAnchor.constraint(equalTo: blackView.topAnchor),
             closeButton.trailingAnchor.constraint(equalTo: blackView.trailingAnchor),
-            
-            avatarImageViewTop,
-            avatarImageViewLeading,
-            avatarImageViewWidth,
-            avatarImageViewHeight,
             
             fullNameLabel.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: substrateImageView.trailingAnchor, constant: inset),
@@ -171,8 +149,9 @@ class ProfileHeaderView: UIView {
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 8),
             statusTextField.leadingAnchor.constraint(equalTo: substrateImageView.trailingAnchor, constant: inset),
             statusTextField.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -inset),
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
-            setStatusButton.topAnchor.constraint(equalTo: substrateImageView.bottomAnchor, constant: inset),
+            setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: inset),
             setStatusButton.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: inset),
             setStatusButton.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -inset),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50)
@@ -183,42 +162,50 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func tapAction() {
-        print(textToPrint)
-        statusLabel.text = textToPrint
+    @objc private func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        statusTextField.resignFirstResponder()
     }
     
-    @objc func showAction(){
-        
-        avatarImageViewX = self.avatarImageView.center.x
-        avatarImageViewY = self.avatarImageView.center.y
+    @objc private func tapAction() {
+        if textToPrint == "" {
+            statusTextField.attributedPlaceholder = NSAttributedString(
+                string: "Cannot be empty!",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
+            )
+        } else {
+            statusTextField.attributedPlaceholder = NSAttributedString(
+                string: "Waiting for something..",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+            )
+            statusLabel.text = textToPrint
+        }
+    }
+    
+    @objc private func showAction(){
         
         UIView.animate(
             withDuration: 0.5,
             delay: 0.1,
             usingSpringWithDamping: 1,
             initialSpringVelocity: 0.3,
-            options: .curveEaseInOut) {
+            options: .curveEaseInOut) { [self] in
                 
                 self.blackView.isHidden = false
                 
-                self.avatarImageViewTop.constant = self.closeButton.bounds.height
-                self.avatarImageViewLeading.isActive = false
-                self.avatarImageViewWidth.constant = UIScreen.main.bounds.width
-                self.avatarImageViewHeight.constant = UIScreen.main.bounds.width
+                self.avatarImageView.layer.position = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
+                
+                self.avatarImageView.layer.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+         
+              //  self.closeButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor).isActive = true
+                
+               // self.closeButton.layer.position = CGPoint(x: avatarImageView.layer.position.x + 150, y: avatarImageView.layer.position.y - 220)
                 
                 self.avatarImageView.layer.cornerRadius = 0
                 self.layoutIfNeeded()
-            } completion: { _ in
-                UIView.animate(withDuration: 1.0,
-                               delay: 0.0) {
-                    self.avatarImageView.layer.cornerRadius = 0
-                }
             }
-        print("Test")
     }
     
-    @objc func hideAction(){
+    @objc private func hideAction(){
         
         UIView.animate(
             withDuration: 0.5,
@@ -226,18 +213,18 @@ class ProfileHeaderView: UIView {
             usingSpringWithDamping: 1,
             initialSpringVelocity: 0.3,
             options: .curveEaseInOut) {
-                self.avatarImageView.center = CGPoint(x: self.avatarImageViewX, y: self.avatarImageViewY)
-                self.avatarImageViewTop.constant = self.whiteView.bounds.minY + 16
-                self.avatarImageViewLeading.isActive = true
-                self.avatarImageViewWidth.constant = 100
-                self.avatarImageViewHeight.constant = 100
+                
+                self.avatarImageView.layer.position = self.substrateImageView.layer.position
+                
+                self.avatarImageView.layer.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+  
                 self.blackView.isHidden = true
                 self.layoutIfNeeded()
                 self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.width / 2
             }
     }
     
-    @objc func textChanged(_ textField: UITextField) {
+    @objc private func textChanged(_ textField: UITextField) {
         textToPrint = textField.text!
     }
 }

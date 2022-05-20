@@ -1,25 +1,22 @@
-//
-//  PostTableViewCell.swift
-//  Navigation
-//
-//  Created by antonfrolov on 19.04.2022.
-//
+
 
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
+    
+    private weak var postViewDelegate: PostViewDelegate?
     
     private let whiteView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIView())
     
-    private let titlePost: UILabel = {
+    private let authorPost: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         $0.textColor = .black
         $0.numberOfLines = 2
-        $0.text = "testTextTitle"
+        $0.text = "New title"
         return $0
     }(UILabel())
     
@@ -64,22 +61,36 @@ class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .systemBackground
         layout()
+        
+        let tapLike = UITapGestureRecognizer(target: self, action: #selector(tapLike))
+        likesPost.addGestureRecognizer(tapLike)
+        likesPost.isUserInteractionEnabled = true
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupCell(_ post: Post) {
-        titlePost.text = post.title
-        imagePost.image = post.image
-        likesPost.text = "Likes: \(post.likes)"
-        viewsPost.text = "Views: \(post.views)"
-        desciptionPost.text = post.description
+    func setupCell(_ postViewDelegate: PostViewDelegate?) {
+        if let postViewDelegate = postViewDelegate {
+            self.postViewDelegate = postViewDelegate
+            authorPost.text = postViewDelegate.post.author
+            imagePost.image = postViewDelegate.post.image
+            likesPost.text = "Likes: \(postViewDelegate.post.likes)"
+            viewsPost.text = "Views: \(postViewDelegate.post.views)"
+            desciptionPost.text = postViewDelegate.post.description
+        } else {
+            authorPost.text = "Def author"
+            imagePost.image = nil
+            likesPost.text = "Likes: 0"
+            viewsPost.text = "Views: 0"
+            desciptionPost.text = "Def desc"
+        }
     }
     
+    
     private func layout() {
-        [whiteView, titlePost, newStack, imagePost, desciptionPost].forEach{contentView.addSubview($0)}
+        [whiteView, authorPost, newStack, imagePost, desciptionPost].forEach{contentView.addSubview($0)}
         
         newStack.addArrangedSubview(likesPost)
         newStack.addArrangedSubview(viewsPost)
@@ -94,11 +105,11 @@ class PostTableViewCell: UITableViewCell {
             whiteView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             whiteView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             
-            titlePost.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: inset),
-            titlePost.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: inset),
-            titlePost.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -inset),
+            authorPost.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: inset),
+            authorPost.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: inset),
+            authorPost.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -inset),
             
-            imagePost.topAnchor.constraint(equalTo: titlePost.bottomAnchor, constant: inset),
+            imagePost.topAnchor.constraint(equalTo: authorPost.bottomAnchor, constant: inset),
             imagePost.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor),
             imagePost.widthAnchor.constraint(equalToConstant: screenSize.width),
             imagePost.heightAnchor.constraint(equalToConstant: screenSize.width),
@@ -112,5 +123,10 @@ class PostTableViewCell: UITableViewCell {
             newStack.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -inset),
             newStack.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor,constant: -inset)
         ])
+    }
+    
+    @objc private func tapLike() {
+        postViewDelegate?.postLikePressed()
+        likesPost.text = "Likes: \(postViewDelegate!.post.likes)"
     }
 }

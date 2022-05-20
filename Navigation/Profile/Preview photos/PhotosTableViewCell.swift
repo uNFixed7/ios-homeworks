@@ -1,4 +1,5 @@
 
+
 import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
@@ -64,6 +65,8 @@ class PhotosTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+        
+        
     }
 
     private func layout() {
